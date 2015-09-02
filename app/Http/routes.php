@@ -54,6 +54,12 @@ Route::get('/position/{id}/{direction}', 'GalleryController@editGalleryPosition'
 Route::get('/project_position/{id}/{direction}', 'ProjectController@editGalleryPosition');
 Route::get('/Motion/edit', 'MotionController@show');
 Route::get('/Motion/delete/{id}', 'MotionController@delete');
+Route::get('move_this_image_down/{id}', 'GalleryController@moveImageDown');
+Route::get('move_this_image_up/{id}', 'GalleryController@moveImageUp');
+Route::get('move_this_project_down/{id}', 'ProjectController@moveImageDown');
+Route::get('move_this_project_up/{id}', 'ProjectController@moveImageUp');
+Route::get('move_this_video_down/{id}', 'MotionController@moveVideoDown');
+Route::get('move_this_video_up/{id}', 'MotionController@moveVideoUp');
 
 Route::post('/FAQ/edit', 'FAQController@create');
 Route::post('/add_cat', 'FAQController@addCat');
@@ -79,9 +85,3 @@ Route::post('/ClientLoginAttempt', 'HomeController@clientLoginAttempt');
 
 
 
-Route::get('move_this_image_down/{id}', 'GalleryController@moveImageDown');
-Route::get('move_this_image_up/{id}', 'GalleryController@moveImageUp');
-Route::get('move_this_project_down/{id}', 'ProjectController@moveImageDown');
-Route::get('move_this_project_up/{id}', 'ProjectController@moveImageUp');
-Route::get('move_this_video_down/{id}', 'MotionController@moveVideoDown');
-Route::get('move_this_video_up/{id}', 'MotionController@moveVideoUp');
