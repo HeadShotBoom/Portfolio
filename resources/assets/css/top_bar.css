@@ -1,0 +1,110 @@
+/* area that is not covered by any menu's items*/
+.top-bar
+    /* logo area */
+,.top-bar-section ul li, .top-bar.expanded .title-area
+    /* menu item */
+,.top-bar-section li:not(.has-form) a:not(.button)
+    /* menuitem with dropdown when hovering */
+,.top-bar-section ul li:hover:not(.has-form) > a, div.contain-to-grid
+{
+    background: transparent;
+    background-color:#ffffff;
+}
+
+nav.top-bar{
+    text-align: center;
+}
+section.top-bar-section{
+    display:inline-block;
+}
+
+/* general font and colors */
+.top-bar-section ul li > a
+    /* topbar H1 name */
+,.top-bar .name h1 a, .top-bar .name h2 a, .top-bar .name h3 a, .top-bar .name h4 a, .top-bar .name p a, .top-bar .name span a
+{
+    font-family: "Crimson Text",serif;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* menu item when hover */
+.top-bar-section li:not(.has-form) a:hover:not(.button)
+{
+    background: transparent;
+    color: #4caf50;
+}
+
+/* parent menu item when leaving a hovered child for another parent menu item */
+.top-bar-section li.hover > a:not(.button) {
+    color: #FFFFFF;
+}
+
+/* menu item when active */
+.top-bar-section li.active:not(.has-form) a:not(.button)
+{
+    background: transparent;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+/* menu item when active and hover */
+.top-bar-section li.active:not(.has-form) a:hover:not(.button)
+{
+    background: transparent;
+    color: #4caf50;
+}
+
+/* dropdown arrow color */
+.top-bar-section .has-dropdown > a::after
+{
+    border-color: rgba(51, 51, 51, 0.4) transparent transparent;
+}
+
+/* dropdown parent when hovering a child item */
+.top-bar-section ul li:hover:not(.has-form) > a
+{
+    color: #FFFFFF;
+}
+
+/* ul.dropdown, only to add border no background */
+.top-bar-section .has-dropdown.hover > .dropdown, .top-bar-section .has-dropdown.not-click:hover > .dropdown, .top-bar-section .has-dropdown > a:focus + .dropdown
+{
+    /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
+}
+
+/* dropdown child */
+.top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button)
+{
+    background: #fff;
+    color: #333;
+}
+/* dropdown child when hover */
+.top-bar-section .dropdown li:hover:not(.has-form):not(.active) > a:not(.button)
+{
+    background: #fff;
+    color: #4caf50;
+}
+
+/* on small screen */
+
+/* content of the toggled menu */
+.top-bar .toggle-topbar.menu-icon a
+{
+    color: #FFFFFF;
+}
+/* toggle 3 horizontal bars */
+.top-bar .toggle-topbar.menu-icon a span::after
+{
+    box-shadow: 0 0 0 1px #333, 0 7px 0 1px #333, 0 14px 0 1px #333;
+}
+/* responsive dropdown back menu */
+.top-bar-section .dropdown li.parent-link a, .top-bar-section .dropdown li.title h5 a {
+    color: #FFFFFF;
+    font-family: "Crimson Text",serif;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+

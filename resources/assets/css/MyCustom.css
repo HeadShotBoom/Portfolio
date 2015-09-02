@@ -1,0 +1,77 @@
+.button-slide-down, .button-slide-down2
+{
+    position:relative;
+    top:25px;
+}
+#faqsort dl dd a
+{
+    color:black;
+}
+
+#faqsort dl dd.active a{
+    color:white;
+    background-color:black;
+}
+
+.delcat form
+{
+    position:relative;
+    top:5px;
+}
+
+a {
+    color:black;
+}
+
+.link {
+    text-decoration: underline;
+    color:blue;
+}
+
+group a {
+    color:black;
+    padding:5px;
+    background-color:lightgrey;
+    position:relative;
+    top:10px;
+}
+
+.arrows{
+    height:30px;
+    position:relative;
+    top:10px;
+}
+
+.red
+{
+    color:red;
+}
+
+.hidden{
+    display:none;
+}
+
+.black-text
+{
+    color:black !important;
+}
+
+.floatright{
+    float:right;
+}
+
+
+.fadein { position:relative; width:100%;  }
+.fadein img { position:absolute; left:0; top:0; }
+
+@media (max-width: 640px) {
+   .button-slide-down
+   {
+       margin-bottom: 50px;
+   }
+    .button-slide-down2
+    {
+        top:247px;
+        left: -70%;
+    }
+}
