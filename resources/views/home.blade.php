@@ -18,7 +18,15 @@
 
     <div class="fadein">
         @foreach($allHomeImages as $image)
-        <img src="{{ $image->path }}" alt="{{ $image->alt_tag }}" onclick="window.location='{{ $image->gallery_link}}'"/>
+        <img src="{{ $image->path }}" alt="{{ $image->alt_tag }}" onclick="window.location='<?php
+        $path = substr(ltrim($image->path, '/'), 0, strpos(ltrim($image->path, '/'), '/'));
+        if($path=='gallery'){
+            echo "/Portfolio/".$image->category;
+        }else if($path=='ProjectImages'){
+            echo "/Projects/".$image->category;
+        }
+?>
+            '"/>
         @endforeach
     </div>
 
@@ -63,9 +71,9 @@
                     $('.fadein :nth-child(' + lastImg + ')').addClass('animated slideOutLeft');
                     $('.fadein :nth-child(1)').addClass('animated slideInRight').css('display', 'block');
                     number=1;
-                    setTimeout(slideEm, 10000);
+                    setTimeout(slideEm, 4000);
                 }else{
-                    setTimeout(slideEm, 10000);
+                    setTimeout(slideEm, 4000);
                 }
             }
             setTimeout(slideEm, 1000);
