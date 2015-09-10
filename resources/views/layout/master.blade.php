@@ -6,7 +6,7 @@
 	@include('layout.meta')
 
 	{{-- Helper to generate SEO friendly page titles --}}
-	<title>Legendary Productions - @section('Welcome')</title>
+	<title>Legendary Productions - @yield('title')</title>
 
 	{{-- Include CSS file and such --}}
 	@include('layout.links')

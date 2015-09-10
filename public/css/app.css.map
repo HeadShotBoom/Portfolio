@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAEA;EACC,6BAA4B,EADrB","file":"app.css","sourcesContent":["// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\n\n.navbar{\n\tborder-radius: 0 !important;\n}\n\n"],"sourceRoot":"/source/"}
