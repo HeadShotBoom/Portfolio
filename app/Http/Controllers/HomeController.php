@@ -27,7 +27,7 @@ class HomeController extends Controller
         if(shuffle($allHomeImages)){
             $allHomeImages = $allHomeImages;
         }
-        return view('pages.welcome', compact('allHomeImages'));
+        return view('home', compact('allHomeImages'));
     }
 
     public function showGallery(Request $request)

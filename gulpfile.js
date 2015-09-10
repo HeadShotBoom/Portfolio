@@ -12,5 +12,13 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
- mix.sass('app.scss');
+ mix.styles([
+     "normalize.css",
+     "foundation.min.css",
+     "glDatePicker.default.css",
+     'dropzone.css',
+     "MyCustom.css",
+     "top_bar.css",
+     "animate.css"
+ ], 'public/css/combinedCss.css');
 });
