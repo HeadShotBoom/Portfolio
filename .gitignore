@@ -2,7 +2,6 @@
 /node_modules
 Homestead.yaml
 .env
+.idea
+.DS_Store
 
-public/gallery/Sample/8906412.jpg
-
-*.jpg
