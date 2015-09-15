@@ -4,4 +4,5 @@ Homestead.yaml
 .env
 /gallery
 /ProjectImages
-
+.idea
+.DS_Store
