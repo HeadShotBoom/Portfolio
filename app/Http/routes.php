@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
@@ -79,9 +80,11 @@ Route::post('/add_iframe', 'MotionController@addiframe');
 
 Route::post('/ClientLinks', 'ClientGalleryUploadController@makeGallery');
 
-Route::get('/Client/{name}', 'HomeController@clientLogin');
+Route::get('/Client/{name}/login', 'HomeController@clientLogin');
 Route::post('/ClientLoginAttempt', 'HomeController@clientLoginAttempt');
+Route::get('/ClientGallery/{name}', 'HomeController@showClientGallery');
 
+Route::post('/ClientGallery/{name}/upload', 'ClientGalleryUploadController@upload');
 
 
 

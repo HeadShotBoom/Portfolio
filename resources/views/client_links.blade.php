@@ -5,7 +5,7 @@
 <p>We continuously strive to deliver images well before the agreed upon date. As soon as your images are complete, we will email you with a link and the password to your gallery. If you think your gallery has already been posted and do not see it here, please head over to the <a href="/Contact" class="link">contact</a> page and send me a message.</p>
 
 @foreach($links as $link)
-<a href="Client/{!! $link->name !!}" >{!! $link->name !!}</a> <br>
+<a href="Client/{!! $link->name !!}/login" >{!! $link->name !!}</a> <br>
 @endforeach
 
 

@@ -31,6 +31,9 @@
                 <li><a class='black-text' href="/Client">Client Links</a></li>
                 <li><a class='black-text' href="/FAQ">FAQ</a></li>
                 <li><a class='black-text' href="/Contact">Contact Me</a></li>
+                @if(Auth::check())
+                <li><a class='black-text' href="/auth/logout">Logout</a></li>
+                @endif
             </ul>
         </section>
     </nav>

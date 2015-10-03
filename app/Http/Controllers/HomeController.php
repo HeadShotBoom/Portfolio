@@ -11,6 +11,7 @@ use Input;
 use Hash;
 use Session;
 use Redirect;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -130,23 +131,58 @@ class HomeController extends Controller
     {
         $url = Request::path();
         $galleryName = ltrim(strstr($url, '/'), '/');
+        if(Auth::check()){
+            $firstTrim = urldecode(ltrim($url, 'Client/'));
+            $adminGallery = substr($firstTrim, 0, strpos($firstTrim, "/"));
+            $adminRedirect = '/ClientGallery/'.$adminGallery;
+            return redirect($adminRedirect);
+        }elseif(Session::has('galleryAccess')){
+            $firstTrim1 = urldecode(ltrim($url, 'Client/'));
+            $intendedGallery = substr($firstTrim1, 0, strpos($firstTrim1, "/"));
+            if(Session::get('galleryAccess') === $intendedGallery){
+                $hereBeforeString = '/ClientGallery/'.$intendedGallery;
+                return redirect($hereBeforeString);
+            }else{
+                return view('clientLogin', compact('galleryName'));
+            }
+        }
         return view('clientLogin', compact('galleryName'));
     }
 
     public function clientLoginAttempt(Request $request)
     {
         $data = Request::all();
-        $galleryName = str_replace('%20', ' ', $data['galleryName']);
+        $galleryName = substr(str_replace('%20', ' ', $data['galleryName']), 0, strpos(str_replace('%20', ' ', $data['galleryName']), "/"));
         $password = $data['password'];
         $hashedPassword = DB::table('client_galleries')->select('password')->where('name', $galleryName)->pluck('password');
         if(Hash::check($password, $hashedPassword))
         {
-            dd('password Match');
+            Session::put('galleryAccess', $galleryName);
+            $redirectString = '/ClientGallery/'.$galleryName;
+            return redirect($redirectString);
         }
         else{
             Session::flash('message', "That Password is not Correct");
             return Redirect::back();
         }
+    }
+
+    public function showClientGallery(Request $request){
+        $url = Request::path();
+        $galleryName = urldecode(ltrim(strstr($url, '/'), '/'));
+
+        if(Auth::check()){
+            return view('clientGallery');
+        }elseif(Session::has('galleryAccess')){
+            if(Session::get('galleryAccess') === $galleryName) {
+                return view('clientGallery');
+            }else{
+                return view('clientLogin', compact('galleryName'));
+            }
+        }else{
+            return view('clientLogin', compact('galleryName'));
+        }
+
     }
 
 }

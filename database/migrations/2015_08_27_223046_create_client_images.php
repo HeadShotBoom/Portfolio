@@ -17,7 +17,8 @@ class CreateClientImages extends Migration
             $table->increments('id');
             $table->string('clientId');
             $table->string('imageName');
-            $table->string('imagePath');
+            $table->string('largePath');
+            $table->string('thumbPath');
             $table->string('chosenImage');
             $table->timestamps();
         });
