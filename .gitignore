@@ -2,6 +2,9 @@
 /node_modules
 Homestead.yaml
 .env
-
+/gallery
+/ProjectImages
+/clientImages
 /.idea
 .DS_Store
+workspace.xml
