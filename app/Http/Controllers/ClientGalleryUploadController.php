@@ -21,7 +21,12 @@ class ClientGalleryUploadController extends Controller
 
     public function makeGallery(Request $request)
     {
-        DB::table('client_galleries')->insert(['name'=> $request->name, 'password'=> bcrypt($request->password)]);
+        $testThis = $request->all();
+        if($request->selectType === 'group'){
+            DB::table('client_galleries')->insert(['name'=> $request->name, 'password'=> 0, 'type' => $request->selectType]);
+        }elseif($request->selectType === 'individual'){
+            DB::table('client_galleries')->insert(['name'=> $request->name, 'password'=> bcrypt($request->password), 'type' => $request->selectType]);
+        }
         return redirect()->back();
     }
 
@@ -65,13 +70,10 @@ class ClientGalleryUploadController extends Controller
         $image = new ImageResize($destinationPath . "/" . $fileName);
         $image->scale(50);
         $image->save($destinationPath . "/thumbs/" . $fileName);
+        $size = getimagesize(ltrim($pathAndFile, '/'));
 
-
-        DB::table('client_images')->insert(['clientId' => $galleryName[0], 'imageName' => $alt, 'largePath' => $pathAndFile, 'thumbPath' => $thumbnailPath]);
+        DB::table('client_images')->insert(['clientId' => $galleryName[1], 'imageName' => $alt, 'largePath' => $pathAndFile, 'thumbPath' => $thumbnailPath, 'height' => $size[1], 'width' => $size[0]]);
 
     }
 
 }
-
-
-//['category' => $galleryName[1], 'path' => $pathAndFile, 'thumbnail' => $thumbnailPath, 'alt_tag' => $alt, 'width' => $size[0], 'height' => $size[1], 'main_gallery' => 0, 'position' => $nextPosition]

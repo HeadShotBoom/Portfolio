@@ -42,7 +42,6 @@
 <div class="grid">
     @foreach($images as $image)
     <group>
-        @if($image->main_gallery == 0)
         <img src="{!! $image->path !!}" />
         @if($image->position != 1)
         {!! HTML::image('SiteImages/Up Arrow.png', 'Up Arrow', array('class' => 'arrows', 'onClick' => "window.location='/move_this_project_up/$image->id'")) !!}
@@ -50,6 +49,7 @@
         @if($image->position != $last)
         {!! HTML::image('SiteImages/Down Arrow.png', 'Down Arrow', array('class' => 'arrows', 'onClick' => "window.location='/move_this_project_down/$image->id'")) !!}
         @endif
+        @if($image->main_gallery == 0)
         <a href="/add_main_proj_gal/{!! $image->id !!}">Add To Main Portfolio?</a>
         @elseif($image->main_gallery == 1)
         <a href="/rem_main_proj_gal/{!! $image->id !!}" class="red">Remove From Main Portfolio?</a>

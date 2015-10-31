@@ -86,5 +86,8 @@ Route::get('/ClientGallery/{name}', 'HomeController@showClientGallery');
 
 Route::post('/ClientGallery/{name}/upload', 'ClientGalleryUploadController@upload');
 
-
+Route::get('/pickThisImage/{id}', 'HomeController@pickThis');
+Route::get('/unPickThisImage/{id}', 'HomeController@unPickThis');
+Route::get('/submitClientOrder/{id}', 'HomeController@clientOrderProcessor');
+Route::get('/placeGroupOrder/{id}', 'HomeController@groupOrderProcessor');
 

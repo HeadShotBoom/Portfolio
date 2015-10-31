@@ -60,6 +60,15 @@ group a {
     float:right;
 }
 
+.selectedImage
+{
+    border: 5px solid greenyellow;
+}
+
+/*.orderButton*/
+/*{*/
+    /**/
+/*}*/
 
 .fadein { position:relative; width:100%;  }
 .fadein img { position:absolute; left:0; top:0; }

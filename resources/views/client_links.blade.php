@@ -20,7 +20,16 @@
 @if($errors->has('name'))
 <p class="red">{{ $errors->first('name') }}</p>
 @endif
-{!! Form::label('password', 'Gallery Password') !!}
+
+        <fieldset>
+            <legend class="row">Group or Individual Gallery?</legend>
+            <input type="radio" name="selectType" value="group" id="group" />
+            <label for="group">Group</label>
+            <input type="radio" name="selectType" value="individual" id="individual" />
+            <label for="individual">Individual</label>
+        </fieldset>
+
+{!! Form::label('password', 'Gallery Password', array('id' => 'passwordField')) !!}
 {!! Form::text('password') !!}
 @if($errors->has('password'))
 <p class="red">{{ $errors->first('password') }}</p>
@@ -32,5 +41,34 @@
     </div>
 </div>
 @endif
+
+
+{!! HTML::script('js/vendor/jquery.js') !!}
+<script>
+    $(document).ready(function() {
+        $('#passwordField').hide();
+        $('#password').hide();
+
+        $("input[name='selectType']").change(function(){
+            var value = $(this).val();
+            toggleFields(value);
+        });
+
+
+        function toggleFields(value){
+            if(value == 'group'){
+                $('#passwordField').hide();
+                $('#password').hide();
+            }
+            if(value == 'individual'){
+                $('#passwordField').show();
+                $('#password').show();
+            }
+
+        }
+    })
+</script>
+
+
 
 @endsection

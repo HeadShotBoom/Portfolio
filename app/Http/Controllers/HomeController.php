@@ -12,6 +12,8 @@ use Hash;
 use Session;
 use Redirect;
 use Auth;
+use URL;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -35,8 +37,12 @@ class HomeController extends Controller
     {
         $path = explode('/', Request::path());
         $galleryName = str_replace("%20", " ", $path[1]);
+
         $images = DB::table('images')->where('category', $galleryName)->get();
         $title = $galleryName;
+        if(Auth::check()){
+            return redirect('/Portfolio/'.$galleryName.'/edit');
+        }
         return view('gallery', compact('images', 'title'));
     }
 
@@ -46,17 +52,26 @@ class HomeController extends Controller
         $galleryName = str_replace("%20", " ", $path[1]);
         $images = DB::table('project_images')->where('category', $galleryName)->get();
         $title = $galleryName;
+        if(Auth::check()){
+            return redirect('/Projects/'.$galleryName.'/edit');
+        }
         return view('projects', compact('images', 'title'));
     }
 
     public function ShowAllProjects()
     {
         $images = DB::table('project_images')->where('main_gallery', 1)->get();
+        if(Auth::check()){
+            return redirect('/MyProjects/edit');
+        }
         return view('main_projects', compact('images'));    }
 
     public function ShowAllPortfolio()
     {
         $images = DB::table('images')->where('main_gallery', 1)->get();
+        if(Auth::check()){
+            return redirect('/MyPortfolio/edit');
+        }
         return view('main_gallery', compact('images'));
     }
 
@@ -64,6 +79,9 @@ class HomeController extends Controller
     public function ShowMotion()
     {
         $links = DB::table('motion_links')->get();
+        if(Auth::check()){
+            return redirect('/Motion/edit');
+        }
         return view('motion', compact('links'));
     }
     public function ShowClientLinks()
@@ -80,6 +98,9 @@ class HomeController extends Controller
     {
         $faqs = Faq::all();
         $category = DB::table('faq_cat')->orderBy('category')->get();
+        if(Auth::check()){
+            return redirect('/FAQ/edit');
+        }
         return view('faq', compact('faqs', 'category'));
     }
     public function contact(Request $request)
@@ -131,6 +152,12 @@ class HomeController extends Controller
     {
         $url = Request::path();
         $galleryName = ltrim(strstr($url, '/'), '/');
+        $shortGalleryName = urldecode(substr($galleryName, 0, strpos($galleryName, "/")));
+        $groupCheck = DB::table('client_galleries')->where('name', $shortGalleryName)->pluck('type');
+        if($groupCheck === 'group'){
+            Session::put('galleryAccess', $shortGalleryName);
+            return redirect('/ClientGallery/'.$shortGalleryName);
+        }
         if(Auth::check()){
             $firstTrim = urldecode(ltrim($url, 'Client/'));
             $adminGallery = substr($firstTrim, 0, strpos($firstTrim, "/"));
@@ -170,18 +197,66 @@ class HomeController extends Controller
     public function showClientGallery(Request $request){
         $url = Request::path();
         $galleryName = urldecode(ltrim(strstr($url, '/'), '/'));
-
+        $relevantImages = DB::table('client_images')->where('clientId', $galleryName)->get();
+        $groupOrNot = DB::table('client_galleries')->where('name', $galleryName)->pluck('type');
         if(Auth::check()){
-            return view('clientGallery');
+            return view('clientGallery', compact('relevantImages', 'galleryName', 'groupOrNot'));
         }elseif(Session::has('galleryAccess')){
             if(Session::get('galleryAccess') === $galleryName) {
-                return view('clientGallery');
+                return view('clientGallery', compact('relevantImages', 'galleryName', 'groupOrNot'));
             }else{
                 return view('clientLogin', compact('galleryName'));
             }
         }else{
             return view('clientLogin', compact('galleryName'));
         }
+
+    }
+
+    public function pickThis(Request $request){
+        $idNum = filter_var(Request::path(),  FILTER_SANITIZE_NUMBER_INT);
+        $id = '#'.$idNum;
+        DB::table('client_images')->where('id', $idNum)->update(['chosenImage' => 1]);
+        $backLink = URL::previous().$id;
+        return redirect($backLink);
+    }
+
+    public function unPickThis(Request $request){
+        $idNum = filter_var(Request::path(),  FILTER_SANITIZE_NUMBER_INT);
+        $id = '#'.$idNum;
+        DB::table('client_images')->where('id', $idNum)->update(['chosenImage' => 0]);
+        $backLink = URL::previous().$id;
+        return redirect($backLink);
+    }
+
+    public function clientOrderProcessor(Request $request)
+    {
+        $whichClient = substr(Request::path(), strpos(Request::path(), '/')+1);
+        $selectedImages = DB::table('client_images')->where('clientId', $whichClient)->where('chosenImage', 1)->get();
+        $imageNames = [];
+        foreach($selectedImages as $dasPics){
+            $imageNames[$dasPics->id] = $dasPics->imageName;
+        }
+        Mail::send('emails.order', ['whichClient' => $whichClient, 'imageNames' => $imageNames], function($message) use ($whichClient, $imageNames){
+            $message->to('headshotboom@live.com', 'Daniel Carroll')->subject('A client placed an order.');
+        });
+
+
+    }
+
+    public function groupOrderProcessor(Request $request)
+    {
+        $individualInfo = Request::all();
+        $whichGallery = Request::input('galleryName');
+        $selectedImages = DB::table('client_images')->where('clientId', $whichGallery)->where('chosenImage', 1)->get();
+        $imageNames = [];
+        foreach($selectedImages as $dasPics){
+            $imageNames[$dasPics->id] = $dasPics->imageName;
+        }
+        Mail::send('emails.groupOrder', ['whichClient' => $whichGallery, 'imageNames' => $imageNames, 'individualInfo' => $individualInfo], function($message) use ($whichGallery, $imageNames, $individualInfo){
+            $message->to('headshotboom@live.com', 'Daniel Carroll')->subject('A client placed an order.');
+        });
+
 
     }
 
