@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 {!! Form::open(['id' => 'billing-form']) !!}
 <div class="form-row">
     <label>
@@ -28,7 +29,12 @@
 <div class="form-row">
     {!! Form::submit('Pay Now') !!}
 </div>
+<?php
+if(isset($error1)){
+echo "<p>$error1</p>";
+}
 
+?>
 <div class="payment-errors"></div>
 
 {!! Form::close() !!}

@@ -35,15 +35,6 @@
 
             this.form[0].submit();
 
-
-
-
-
-
-
-
-
-
             console.log(status, response);
         }
 
