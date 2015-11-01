@@ -91,3 +91,5 @@ Route::get('/unPickThisImage/{id}', 'HomeController@unPickThis');
 Route::get('/submitClientOrder/{id}', 'HomeController@clientOrderProcessor');
 Route::get('/placeGroupOrder/{id}', 'HomeController@groupOrderProcessor');
 
+Route::get('/Money', 'MoneyController@makeForm');
+Route::post('/Money', 'MoneyController@chargeCustomer');
