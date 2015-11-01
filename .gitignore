@@ -5,6 +5,7 @@ Homestead.yaml
 /public/gallery
 /public/ProjectImages
 /public/clientImages
-/.idea
+
+.idea/
 .DS_Store
 workspace.xml
