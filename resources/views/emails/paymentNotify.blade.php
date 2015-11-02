@@ -1,0 +1,1 @@
+<p>Youve received a payment from {!! $mailData->name !!} for ${!! $mailData->amount !!} </p>

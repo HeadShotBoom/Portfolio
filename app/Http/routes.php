@@ -91,5 +91,8 @@ Route::get('/unPickThisImage/{id}', 'HomeController@unPickThis');
 Route::get('/submitClientOrder/{id}', 'HomeController@clientOrderProcessor');
 Route::get('/placeGroupOrder/{id}', 'HomeController@groupOrderProcessor');
 
-Route::get('/Money', 'MoneyController@makeForm');
-Route::post('/Money', 'MoneyController@chargeCustomer');
+Route::get('/Billing/{id}', 'MoneyController@makeForm');
+Route::post('/Billing/{id}', 'MoneyController@chargeCustomer');
+
+Route::get('/MakeBill', 'MoneyController@makeBill');
+Route::post('/MakeBill', 'MoneyController@sendBill');
