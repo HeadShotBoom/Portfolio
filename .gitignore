@@ -1,7 +1,6 @@
 /vendor
 /node_modules
 Homestead.yaml
-.env
 /public/gallery
 /public/ProjectImages
 /public/clientImages
