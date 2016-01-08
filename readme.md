@@ -31,5 +31,22 @@
   - **_nav**
 - **SUPERFULOUS VIEWS** 
 
+## Controllers
 
+- **ClientGalleryUploadController**
+    **Handles uploads of files**
+    
+    
+    
+## Needed Work
+   **Storyboarding**
 
+   **Design** 
+
+   **Move public functions from home controller to their named controller**
+   
+   **Create First time use Setup Wizard**
+   
+   **Create Blogging Feature**
+   
+   **My Branding**
