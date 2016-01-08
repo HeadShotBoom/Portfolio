@@ -51,7 +51,7 @@ Assigning Auth Middleware within the controller:
 public function __construct()
 {
 
-   // This will force Auht on all methods within the 
+   // This will force Auth on all methods within the 
    // controller
    $this->middleware('auth');
    
@@ -68,7 +68,7 @@ public function __construct()
      'edit',
      'destroy'
      'update'
-    ]);
+    ]]);
    
 }
 ```
