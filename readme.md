@@ -44,6 +44,13 @@
 - [ ] **Design** 
 
 - [ ] **Move public functions from home controller to their named controller**
+
+```php
+public function __construct()
+{
+   $this->middleware('Auth', ['except'=>'index']);
+}
+```
    
 - [ ] **Create First time use Setup Wizard**
    
