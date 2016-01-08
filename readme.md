@@ -41,7 +41,7 @@
 ## Needed Work
 - [ ] **Storyboarding**
 
-- [ ] **Move public functions from home controller to their named controller**
+- [ ] **Separation of concerns within controllers**
 
 Each controller should implement it's own concerns. For example, the FaqController should handle methods related to it's class. In the event that not every method should require Auth see below.
 
@@ -61,6 +61,14 @@ public function __construct()
    
    // This will force Auth only on specified methods
    $this->middle('auth'=>['only'=>'edit']);
+   
+   // This will force Auth only to what is declared 
+   // in an array of mehtods
+   $this->middleware('auth'=>['only'=>[
+     'edit',
+     'destroy'
+     'update'
+    ]);
    
 }
 ```
