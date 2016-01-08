@@ -34,19 +34,19 @@
 ## Controllers
 
 - **ClientGalleryUploadController**
-    **Handles uploads of files**
+    - Handles upload of client image files
     
     
     
 ## Needed Work
-   **Storyboarding**
+- [ ] **Storyboarding**
 
-   **Design** 
+- [ ] **Design** 
 
-   **Move public functions from home controller to their named controller**
+- [ ] **Move public functions from home controller to their named controller**
    
-   **Create First time use Setup Wizard**
+- [ ]  **Create First time use Setup Wizard**
    
-   **Create Blogging Feature**
+- [ ]   **Create Blogging Feature**
    
-   **My Branding**
+- [ ]   **My Branding**
