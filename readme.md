@@ -40,6 +40,7 @@
     
 ## Needed Work
 - [ ] **Storyboarding**
+    - [ ] **What should we see upon fresh install?** Setup wizard.
 
 - [ ] **Separation of concerns within controllers**
 
